@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Informe QA - ERP_SENA_Final — Landing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0f1724;--card:#101828;--accent:#38bdf8;--muted:#94a3b8;--glass:rgba(255,255,255,0.05)}
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{margin:0;background:linear-gradient(180deg,#0f172a 0%, #1e293b 60%);color:#f1f5f9;-webkit-font-smoothing:antialiased}
+    .container{max-width:1200px;margin:40px auto;padding:28px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px}
+    .brand{display:flex;gap:16px;align-items:center}
+    .logo{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--accent),#818cf8);display:flex;align-items:center;justify-content:center;font-weight:800;color:#0f172a;font-size:20px}
+    h1{margin:0;font-size:26px;font-weight:800}
+    p.lead{margin:6px 0 0;color:var(--muted);font-size:15px}
+    .badge{background:linear-gradient(90deg,#6366f1,#06b6d4);padding:8px 14px;border-radius:999px;font-weight:600;font-size:13px}
+
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:24px}
+    @media (max-width:980px){.grid{grid-template-columns:1fr}}
+
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.08);padding:24px;border-radius:18px;box-shadow:0 6px 40px rgba(2,6,23,0.5)}
+    .section{margin-bottom:32px}
+    .section h2{margin:0 0 12px;font-size:20px;font-weight:700}
+    .pill{display:inline-block;padding:6px 12px;background:var(--glass);border-radius:999px;color:var(--accent);font-weight:700;margin-bottom:14px;font-size:14px}
+
+    .toc{display:flex;flex-direction:column;gap:10px}
+    .toc a{color:#cbd5e1;padding:10px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;transition:all .2s}
+    .toc a:hover{background:rgba(255,255,255,0.08);color:#fff}
+
+    .feature{display:flex;gap:14px;margin-top:12px}
+    .feature .dot{min-width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);font-size:16px}
+    .muted{color:var(--muted)}
+
+    footer{margin-top:40px;text-align:center;color:var(--muted);font-size:13px}
+
+    .code{background:#0f172a;padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,monospace;font-size:13px;color:#bae6fd;overflow:auto;margin-top:14px}
+
+    .kpi{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}
+    .kpi .item{background:linear-gradient(180deg,#0f172a, #1e293b);padding:14px;border-radius:12px;min-width:100px;text-align:center}
+    .item .num{font-weight:800;color:var(--accent);font-size:20px}
+    .item .lbl{font-size:13px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">ER</div>
+        <div>
+          <h1>Informe QA — Requisitos & Redes para <span style="color:var(--accent)">ERP_SENA_Final</span></h1>
+          <p class="lead">Landing page con los puntos clave del análisis del repositorio: arquitectura, sistema operativo recomendado, organismos de estandarización, familias de protocolos, medios de transmisión y plan de pruebas QA.</p>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <div class="badge">Versión: 1.0 • Sept 20, 2025</div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Main content -->
+      <main class="card">
+
+        <!-- 1. Resumen del repositorio ampliado -->
+        <section id="repo" class="section">
+          <div class="pill">1 • Resumen del repositorio</div>
+          <h2>Visión general y elementos técnicos</h2>
+          <p class="muted">El repositorio <strong>ERP_SENA_Final</strong> contiene una solución ERP ligera para gestión de inventario, clientes, pedidos y facturación. Para un equipo QA/DevOps, es crucial comprender su arquitectura antes del despliegue y validación.</p>
+
+          <div class="feature">
+            <div class="dot">A</div>
+            <div>
+              <strong>Back-end (Java / Spring Boot)</strong>
+              <p class="muted">Aplicación construida sobre Spring Boot (<code>pom.xml</code>). QA debe verificar: versión de Java (11/17), controladores REST, seguridad, y configuración de perfiles (dev/prod). Revisión de manejo de excepciones y logs.</p>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="dot">B</div>
+            <div>
+              <strong>Base de datos (MySQL)</strong>
+              <p class="muted">Incluye script SQL para crear tablas. QA revisa integridad referencial, índices y migraciones. Se recomienda probar backups y restauraciones en staging.</p>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="dot">C</div>
+            <div>
+              <strong>Front-end (React)</strong>
+              <p class="muted">Frontend con Node.js. QA ejecuta <code>npm audit</code>, revisa dependencias, realiza pruebas de interfaz y verifica CORS y tiempos de respuesta de API.</p>
+            </div>
+          </div>
+
+          <div class="kpi">
+            <div class="item"><div class="num">3</div><div class="lbl">Componentes</div></div>
+            <div class="item"><div class="num">SQL</div><div class="lbl">Esquema DB</div></div>
+            <div class="item"><div class="num">React</div><div class="lbl">Frontend</div></div>
+          </div>
+        </section>
+
+        <!-- 2. Características del SO ampliado -->
+        <section id="so" class="section">
+          <div class="pill">2 • Características del Sistema Operativo</div>
+          <h2>Requisitos del SO — Ubuntu Server LTS / Debian</h2>
+
+          <p class="muted">Linux es la opción recomendada para producción por estabilidad, soporte a runtimes (Java, Node, MySQL), comunidad y seguridad.</p>
+
+          <h3>Soporte de Runtimes</h3>
+          <ul class="muted">
+            <li><strong>OpenJDK 11/17</strong>: validar con <code>java -version</code>.</li>
+            <li><strong>Maven 3.6+</strong>: construir backend con <code>mvn test</code>.</li>
+            <li><strong>Node.js LTS</strong>: ejecutar <code>npm install</code> y <code>npm start</code>.</li>
+            <li><strong>MySQL 8</strong>: validar con clientes y pruebas de integridad.</li>
+          </ul>
+
+          <h3>Seguridad</h3>
+          <ul class="muted">
+            <li>Usuarios dedicados no-root para cada servicio.</li>
+            <li>Firewall con puertos mínimos abiertos.</li>
+            <li>Gestión de secretos con variables de entorno o vault.</li>
+            <li>AppArmor/SELinux configurado.</li>
+          </ul>
+
+          <h3>Disponibilidad</h3>
+          <p class="muted">Implementar backups automáticos, monitorización (Prometheus+Grafana) y alertas de recursos.</p>
+
+          <div class="code">Ejemplo QA: <br><code>systemctl status erp-backend.service</code></div>
+        </section>
+
+        <!-- 3. Organizaciones de estandares -->
+        <section id="orgs" class="section">
+          <div class="pill">3 • Organizaciones de estándares</div>
+          <h2>Entidades clave en redes y telecomunicaciones</h2>
+
+          <ul class="muted">
+            <li><strong>ISO</strong>: define modelos de referencia como OSI.</li>
+            <li><strong>IEEE</strong>: estándares físicos (Ethernet, Wi-Fi).</li>
+            <li><strong>ITU</strong>: telecomunicaciones globales, espectro.</li>
+            <li><strong>IETF</strong>: RFCs para TCP, UDP, HTTP, TLS.</li>
+            <li><strong>W3C</strong>: estándares web (HTML, accesibilidad).</li>
+            <li><strong>ANSI/ETSI</strong>: armonización regional.</li>
+          </ul>
+        </section>
+
+        <!-- 4. Familias de protocolos -->
+        <section id="protocols" class="section">
+          <div class="pill">4 • Familias de protocolos</div>
+          <h2>Comparativa y usos</h2>
+
+          <h3>Orientados a conexión (TCP)</h3>
+          <ul class="muted">
+            <li>Entrega ordenada, retransmisiones y control de flujo.</li>
+            <li>Usos: HTTP/HTTPS, bases de datos, transacciones.</li>
+          </ul>
+
+          <h3>No orientados a conexión (UDP)</h3>
+          <ul class="muted">
+            <li>Sin garantías, baja latencia.</li>
+            <li>Usos: DNS, streaming, VoIP.</li>
+          </ul>
+        </section>
+
+        <!-- 5. Medios de transmisión -->
+        <section id="media" class="section">
+          <div class="pill">5 • Medios de transmisión</div>
+          <h2>Guiados y no guiados</h2>
+
+          <h3>Guiados</h3>
+          <ul class="muted">
+            <li>Par trenzado: económico y común en LAN.</li>
+            <li>Cable coaxial: uso limitado en redes modernas.</li>
+            <li>Fibra óptica: altas velocidades y largas distancias.</li>
+          </ul>
+
+          <h3>No guiados</h3>
+          <ul class="muted">
+            <li>Wi-Fi: flexible pero sensible a interferencias.</li>
+            <li>Bluetooth/IR: corto alcance, IoT.</li>
+            <li>Microondas/satélite: enlaces remotos, latencia alta.</li>
+          </ul>
+        </section>
+
+        <!-- 6. Acciones QA -->
+        <section id="qa" class="section">
+          <div class="pill">6 • Acciones QA</div>
+          <h2>Plan de pruebas</h2>
+
+          <ol class="muted">
+            <li>Pruebas end-to-end: flujo completo de pedidos y facturación.</li>
+            <li>Smoke tests: ejecución de <code>mvn test</code> y <code>npm start</code>.</li>
+            <li>Pruebas de carga con JMeter o k6.</li>
+            <li>Pruebas de seguridad: OWASP, revisión de secrets.</li>
+            <li>Pruebas de recuperación: restaurar backups.</li>
+            <li>Pruebas de red: simular latencia y pérdida.</li>
+            <li>Pruebas de compatibilidad: navegadores y móviles.</li>
+          </ol>
+        </section>
+
+        <footer class="muted">Informe QA — ERP_SENA_Final • Todos los derechos reservados</footer>
+
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="card">
+        <h3 style="margin:0 0 12px 0">Contenido</h3>
+        <nav class="toc">
+          <a href="#repo">1. Resumen del repositorio</a>
+          <a href="#so">2. Características del SO</a>
+          <a href="#orgs">3. Organizaciones de estándares</a>
+          <a href="#protocols">4. Familias de protocolos</a>
+          <a href="#media">5. Medios de transmisión</a>
+          <a href="#qa">6. Acciones QA</a>
+        </nav>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe Técnico - ERP_SENA_Final</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --accent-primary: #3b82f6;
+      --accent-secondary: #6366f1;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      --glass: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 10px 25px rgba(2, 6, 23, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      color: var(--text-primary);
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header Styles */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: white;
+      font-size: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-text h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .brand-text p {
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    .badge {
+      background: var(--gradient);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 30px;
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Card Styles */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(2, 6, 23, 0.7);
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--glass);
+      border-radius: 50px;
+      color: var(--accent-primary);
+      font-weight: 700;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .section p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    /* Feature Styles */
+    .feature {
+      display: flex;
+      gap: 16px;
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      border-left: 4px solid var(--accent-primary);
+    }
+
+    .feature .icon {
+      min-width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: var(--glass);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-primary);
+      font-size: 20px;
+    }
+
+    .feature-content h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .feature-content p {
+      margin: 0;
+    }
+
+    /* KPI Styles */
+    .kpi {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .kpi .item {
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.7));
+      padding: 16px;
+      border-radius: 12px;
+      min-width: 120px;
+      text-align: center;
+      flex: 1;
+      border: 1px solid var(--border);
+    }
+
+    .item .num {
+      font-weight: 800;
+      color: var(--accent-primary);
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .item .lbl {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* List Styles */
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 20px;
+      color: var(--text-secondary);
+    }
+
+    ul li, ol li {
+      margin-bottom: 8px;
+    }
+
+    strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Code Block */
+    .code {
+      background: rgba(15, 23, 42, 0.7);
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 14px;
+      color: #7dd3fc;
+      overflow: auto;
+      margin-top: 16px;
+    }
+
+    /* TOC Styles */
+    .toc {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .toc a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-secondary);
+      padding: 12px 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .toc a:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+    }
+
+    .toc a i {
+      width: 20px;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+      padding: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Accordion for additional information */
+    .accordion {
+      margin-top: 20px;
+    }
+
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-header h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .accordion-content {
+      padding: 20px 0;
+      display: none;
+    }
+
+    .accordion-content.active {
+      display: block;
+    }
+
+    /* Table Styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      color: var(--text-secondary);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    /* Highlight Box */
+    .highlight {
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.1));
+      border-left: 4px solid var(--accent-primary);
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">ER</div>
+        <div class="brand-text">
+          <h1>Informe Técnico — ERP_SENA_Final</h1>
+          <p>Análisis completo de la plataforma tecnológica: sistema operativo, estándares de redes, protocolos y medios de transmisión</p>
+        </div>
+      </div>
+      <div class="badge">
+        <i class="fas fa-calendar-alt"></i> Versión 2.0 • Sept 2025
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Main Content -->
+      <main class="card">
+        <!-- 1. Sistema Operativo -->
+        <section id="so" class="section">
+          <div class="pill"><i class="fas fa-server"></i> 1 • Sistema Operativo</div>
+          <h2>Características del Sistema Operativo Seleccionado</h2>
+          <p>Para el despliegue del sistema ERP_SENA_Final, se recomienda utilizar <strong>Ubuntu Server LTS</strong> como sistema operativo principal, basado en las siguientes características técnicas:</p>
+
+          <div class="feature">
+            <div class="icon"><i class="fas fa-microchip"></i></div>
+            <div class="feature-content">
+              <h3>Soporte de Runtimes</h3>
+              <p>El SO debe soportar los siguientes runtimes esenciales para la aplicación:</p>
+              <ul>
+                <li><strong>OpenJDK 11/17</strong>: Para la ejecución del backend Spring Boot</li>
+                <li><strong>Node.js LTS</strong>: Para la ejecución del frontend React</li>
+                <li><strong>MySQL 8</strong>: Como sistema de gestión de base de datos</li>
+                <li><strong>Maven 3.6+</strong>: Para la construcción del proyecto Java</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="feature-content">
+              <h3>Seguridad</h3>
+              <p>Características de seguridad implementadas:</p>
+              <ul>
+                <li>Usuarios dedicados no-root para cada servicio</li>
+                <li>Firewall configurado con puertos mínimos necesarios</li>
+                <li>Gestión de secretos mediante variables de entorno</li>
+                <li>Configuración de AppArmor/SELinux para contención de procesos</li>
+                <li>Actualizaciones automáticas de seguridad habilitadas</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="icon"><i class="fas fa-sync-alt"></i></div>
+            <div class="feature-content">
+              <h3>Disponibilidad y Mantenimiento</h3>
+              <p>Características para garantizar alta disponibilidad:</p>
+              <ul>
+                <li>Soporte para backups automáticos y restauraciones</li>
+                <li>Monitorización con Prometheus + Grafana</li>
+                <li>Sistema de alertas por consumo de recursos</li>
+                <li>Soporte para virtualización y contenedores</li>
+                <li>Alta compatibilidad con hardware estándar del mercado</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="code">
+            <strong>Comandos de verificación QA:</strong><br>
+            <code>java -version</code> # Verificar versión de Java<br>
+            <code>systemctl status erp-backend.service</code> # Verificar servicio<br>
+            <code>npm audit</code> # Revisar vulnerabilidades frontend
+          </div>
+
+          <div class="kpi">
+            <div class="item">
+              <div class="num">LTS</div>
+              <div class="lbl">Soporte Largo Plazo</div>
+            </div>
+            <div class="item">
+              <div class="num">64-bit</div>
+              <div class="lbl">Arquitectura</div>
+            </div>
+            <div class="item">
+              <div class="num">4GB+</div>
+              <div class="lbl">RAM Mínima</div>
+            </div>
+            <div class="item">
+              <div class="num">20GB+</div>
+              <div class="lbl">Almacenamiento</div>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <h3><i class="fas fa-plus-circle"></i> Comparativa de Sistemas Operativos</h3>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <table>
+                <tr>
+                  <th>Característica</th>
+                  <th>Ubuntu Server</th>
+                  <th>Windows Server</th>
+                  <th>RHEL</th>
+                </tr>
+                <tr>
+                  <td>Licencia</td>
+                  <td>Gratuita (Open Source)</td>
+                  <td>Licencia Propietaria</td>
+                  <td>Suscripción Paga</td>
+                </tr>
+                <tr>
+                  <td>Soporte Java</td>
+                  <td>Excelente</td>
+                  <td>Buena</td>
+                  <td>Excelente</td>
+                </tr>
+                <tr>
+                  <td>Seguridad</td>
+                  <td>Muy Alta</td>
+                  <td>Alta</td>
+                  <td>Muy Alta</td>
+                </tr>
+                <tr>
+                  <td>Costo Total</td>
+                  <td>Bajo</td>
+                  <td>Alto</td>
+                  <td>Medio</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Organizaciones de Estandares -->
+        <section id="orgs" class="section">
+          <div class="pill"><i class="fas fa-globe"></i> 2 • Organizaciones de Estándares</div>
+          <h2>Organizaciones de Estandarización en Redes y Networking</h2>
+          <p>Las siguientes organizaciones son responsables de desarrollar y mantener los estándares internacionales en el área de redes y telecomunicaciones:</p>
+
+          <div class="feature">
+            <div class="icon"><i class="fas fa-network-wired"></i></div>
+            <div class="feature-content">
+              <h3>Principales Organismos de Estandarización</h3>
+              <ul>
+                <li><strong>ISO</strong> (International Organization for Standardization): Define modelos de referencia como OSI para interoperabilidad entre sistemas.</li>
+                <li><strong>IEEE</strong> (Institute of Electrical and Electronics Engineers): Desarrolla estándares para componentes físicos como Ethernet (802.3) y Wi-Fi (802.11).</li>
+                <li><strong>ITU</strong> (International Telecommunication Union): Establece estándares globales de telecomunicaciones y gestión del espectro radioeléctrico.</li>
+                <li><strong>IETF</strong> (Internet Engineering Task Force): Desarrolla y promueve estándares de Internet a través de RFCs (TCP, IP, HTTP, TLS).</li>
+                <li><strong>W3C</strong> (World Wide Web Consortium): Desarrolla estándares para la web (HTML, CSS, accesibilidad).</li>
+                <li><strong>ANSI</strong> (American National Standards Institute) y <strong>ETSI</strong> (European Telecommunications Standards Institute): Organismos regionales que armonizan estándares a nivel nacional y continental.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <p><i class="fas fa-lightbulb"></i> <strong>Nota:</strong> El modelo OSI, desarrollado por ISO, proporciona un marco de referencia para la comprensión de las comunicaciones en red a través de sus 7 capas, facilitando la interoperabilidad entre sistemas de diferentes fabricantes.</p>
+          </div>
+        </section>
+
+        <!-- 3. Familias de Protocolos -->
+        <section id="protocols" class="section">
+          <div class="pill"><i class="fas fa-exchange-alt"></i> 3 • Familias de Protocolos</div>
+          <h2>Familias de Protocolos de Transmisión y Recepción de Datos</h2>
+          <p>En las comunicaciones de red, existen dos grandes familias de protocolos según su método de operación:</p>
+
+          <div class="feature">
+            <div class="icon"><i class="fas fa-handshake"></i></div>
+            <div class="feature-content">
+              <h3>Protocolos Orientados a Conexión (TCP)</h3>
+              <p>Establecen una conexión formal antes de transmitir datos, garantizando entrega confiable y ordenada:</p>
+              <ul>
+                <li>Requieren handshake inicial (SYN, SYN-ACK, ACK)</li>
+                <li>Control de flujo y congestión</li>
+                <li>Retransmisión de paquetes perdidos</li>
+                <li>Entrega ordenada de datos</li>
+                <li><strong>Usos comunes:</strong> HTTP/HTTPS, SSH, FTP, SMTP, bases de datos</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="icon"><i class="fas fa-paper-plane"></i></div>
+            <div class="feature-content">
+              <h3>Protocolos No Orientados a Conexión (UDP)</h3>
+              <p>Transmiten datos sin establecer conexión previa, priorizando velocidad sobre confiabilidad:</p>
+              <ul>
+                <li>Sin handshake inicial</li>
+                <li>Sin garantías de entrega</li>
+                <li>Sin control de flujo o congestión</li>
+                <li>Menor overhead y latencia</li>
+                <li><strong>Usos comunes:</strong> DNS, VoIP, video streaming, juegos online</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="kpi">
+            <div class="item">
+              <div class="num">TCP</div>
+              <div class="lbl">Orientado a Conexión</div>
+            </div>
+            <div class="item">
+              <div class="num">UDP</div>
+              <div class="lbl">No Orientado a Conexión</div>
+            </div>
+            <div class="item">
+              <div class="num">80/443</div>
+              <div class="lbl">Puertos HTTP/S</div>
+            </div>
+            <div class="item">
+              <div class="num">53</div>
+              <div class="lbl">Puerto DNS</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Medios de Transmisión -->
+        <section id="media" class="section">
+          <div class="pill"><i class="fas fa-wifi"></i> 4 • Medios de Transmisión</div>
+          <h2>Medios de Transmisión Guiados y No Guiados</h2>
+          <p>Los medios de transmisión constituyen el canal físico a través del cual se propagan las señales entre emisor y receptor:</p>
+
+          <div class="feature">
+            <div class="icon"><i class="fas fa-cable-car"></i></div>
+            <div class="feature-content">
+              <h3>Medios Guiados</h3>
+              <p>Utilizan un conductor físico para guiar las señales:</p>
+              <ul>
+                <li><strong>Par Trenzado:</strong> Económico, común en redes Ethernet (CAT5e, CAT6, CAT7)</li>
+                <li><strong>Cable Coaxial:</strong> Mayor ancho de banda, usado en TV por cable y conexiones antiguas</li>
+                <li><strong>Fibra Óptica:</strong> Alta velocidad, larga distancia, inmune a interferencias (FO monomodo/multimodo)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="icon"><i class="fas fa-broadcast-tower"></i></div>
+            <div class="feature-content">
+              <h3>Medios No Guiados</h3>
+              <p>Transmiten señales sin un conductor físico, mediante ondas electromagnéticas:</p>
+              <ul>
+                <li><strong>Wi-Fi (IEEE 802.11):</strong> Flexibilidad de conexión, susceptible a interferencias</li>
+                <li><strong>Bluetooth:</strong> Corto alcance, ideal para dispositivos personales</li>
+                <li><strong>Infrarrojos (IR):</strong> Corto alcance, requiere línea de vista</li>
+                <li><strong>Microondas:</strong> Largo alcance, usado en enlaces punto a punto</li>
+                <li><strong>Satelital:</strong> Cobertura global, alta latencia</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <p><i class="fas fa-info-circle"></i> <strong>Para el ERP_SENA_Final:</strong> Se recomienda el uso de fibra óptica para el backbone de red y conexiones cableadas (par trenzado CAT6) para estaciones de trabajo, complementado con Wi-Fi 6 para dispositivos móviles.</p>
+          </div>
+        </section>
+
+        <!-- 5. Acciones QA -->
+        <section id="qa" class="section">
+          <div class="pill"><i class="fas fa-clipboard-check"></i> 5 • Plan de Control de Calidad</div>
+          <h2>Acciones de QA para el Despliegue</h2>
+          <p>Plan de pruebas para garantizar la calidad del despliegue del ERP_SENA_Final:</p>
+
+          <ol>
+            <li><strong>Pruebas de Instalación:</strong> Verificar la correcta instalación de todos los componentes en Ubuntu Server</li>
+            <li><strong>Pruebas de Integración:</strong> Validar la comunicación entre frontend, backend y base de datos</li>
+            <li><strong>Pruebas de Rendimiento:</strong> Evaluar tiempos de respuesta bajo carga con JMeter o k6</li>
+            <li><strong>Pruebas de Seguridad:</strong> Escaneo de vulnerabilidades con OWASP ZAP y revisión de configuración</li>
+            <li><strong>Pruebas de Recuperación:</strong> Verificar procedimientos de backup y restauración</li>
+            <li><strong>Pruebas de Red:</strong> Simular condiciones de red adversas (pérdida de paquetes, latencia)</li>
+            <li><strong>Pruebas de Compatibilidad:</strong> Verificar funcionamiento en diferentes navegadores y dispositivos</li>
+          </ol>
+
+          <div class="code">
+            <strong>Comandos para pruebas QA:</strong><br>
+            <code>mvn test</code> # Ejecutar pruebas unitarias backend<br>
+            <code>npm test</code> # Ejecutar pruebas frontend<br>
+            <code>mysql -u root -p &lt; database_schema.sql</code> # Importar esquema de BD<br>
+            <code>systemctl enable erp-backend</code> # Habilitar inicio automático
+          </div>
+        </section>
+
+        <footer>
+          <p>Informe Técnico — ERP_SENA_Final • Desarrollado para el programa de Análisis y Desarrollo de Software SENA</p>
+          <p>© 2025 - Todos los derechos reservados</p>
+        </footer>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="card">
+        <h3 style="margin: 0 0 20px 0; display: flex; align-items: center; gap: 10px;">
+          <i class="fas fa-bookmark"></i> Contenido
+        </h3>
+        <nav class="toc">
+          <a href="#so"><i class="fas fa-server"></i> 1. Sistema Operativo</a>
+          <a href="#orgs"><i class="fas fa-globe"></i> 2. Organizaciones de Estándares</a>
+          <a href="#protocols"><i class="fas fa-exchange-alt"></i> 3. Familias de Protocolos</a>
+          <a href="#media"><i class="fas fa-wifi"></i> 4. Medios de Transmisión</a>
+          <a href="#qa"><i class="fas fa-clipboard-check"></i> 5. Plan de Control de Calidad</a>
+        </nav>
+
+        <div style="margin-top: 30px; padding: 20px; background: rgba(59, 130, 246, 0.1); border-radius: 12px;">
+          <h4 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-download"></i> Recursos
+          </h4>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 15px;">Documentación adicional para consulta:</p>
+          <a href="#" style="display: block; padding: 10px; background: var(--glass); border-radius: 8px; color: var(--accent-primary); text-decoration: none; margin-bottom: 8px; font-size: 14px;">
+            <i class="fas fa-file-pdf"></i> Especificaciones Técnicas
+          </a>
+          <a href="#" style="display: block; padding: 10px; background: var(--glass); border-radius: 8px; color: var(--accent-primary); text-decoration: none; margin-bottom: 8px; font-size: 14px;">
+            <i class="fas fa-file-code"></i> Manual de Instalación
+          </a>
+          <a href="https://github.com/fergmoon1/ERP_SENA_Final.git" style="display: block; padding: 10px; background: var(--glass); border-radius: 8px; color: var(--accent-primary); text-decoration: none; font-size: 14px;">
+            <i class="fab fa-github"></i> Repositorio GitHub
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    function toggleAccordion(element) {
+      const content = element.nextElementSibling;
+      const icon = element.querySelector('.fa-chevron-down');
+      
+      content.classList.toggle('active');
+      
+      if (content.classList.contains('active')) {
+        icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+      } else {
+        icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+      }
+    }
+  </script>
+</body>
+</html>
